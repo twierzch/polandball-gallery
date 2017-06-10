@@ -4,6 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   entry: [
     'babel-polyfill',
+    'whatwg-fetch',
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
@@ -32,6 +33,14 @@ module.exports = {
         use: [ 'style-loader', 'css-loader' ]
       }
     ],
+  },
+
+  resolve: {
+    extensions: [".js"],
+    modules: [
+      __dirname,
+      path.resolve(__dirname, "./node_modules")
+    ]
   },
 
   plugins: [
