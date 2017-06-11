@@ -41,6 +41,9 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
+    "mobx": "^3.1.14",
+    "mobx-react": "^4.2.1",
+    "navigo": "^5.1.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "whatwg-fetch": "^2.0.3"

@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
+import { useStrict } from 'mobx';
 
-import { App } from './app'
+import { App } from './app';
+import router from './router';
 
+useStrict( true );
 
 const rootEl = document.getElementById('root');
 const render = Component =>

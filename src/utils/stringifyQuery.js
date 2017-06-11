@@ -1,5 +1,5 @@
 export function stringifyQuery( query ) {
-    if( typeof query === 'string' ) return query;
+    if( typeof query === 'string' || query == null ) return query;
 
     const queryParts = [];
 
@@ -12,4 +12,18 @@ export function stringifyQuery( query ) {
     }
 
     return queryParts.join('&');
+}
+
+export function destringifyQuery( query ) {
+    if( !query || typeof query !== 'string' ) return query;
+
+    const queryParts = query.split( '&' );
+
+    return queryParts.reduce( decodeQueryParts, {} );
+}
+
+function decodeQueryParts(acc, queryParts) {
+    const [ key, val ] = queryParts.split( '=' ).map( decodeURIComponent );
+
+    return Object.assign( acc, { [key]: val } )
 }
