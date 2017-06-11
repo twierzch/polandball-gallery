@@ -1,10 +1,10 @@
 import { action, observable } from 'mobx';
 
-import { updateUrlOnStateChange } from 'src/router';
+
 import { destringifyQuery, stringifyQuery } from 'src/utils/stringifyQuery';
 
 
-export class StateStore {
+class StateStore {
     @observable viewName;
     @observable clientId;
     @observable imageId;
@@ -22,18 +22,13 @@ export class StateStore {
                 break;
         }
 
-        const queryObj = destringifyQuery( query );
-
-        if( queryObj ) {
+        if( query ) {
+            const queryObj = destringifyQuery( query );
             this.setClientId( queryObj.clientId );
-        }
-
-        if( this.clientId && !queryObj.clientId ) {
-            updateUrlOnStateChange();
         }
     }
 
-    @action
+    @action.bound
     setClientId( clientId ) {
         if( !clientId ) return;
 

@@ -1,6 +1,7 @@
 import Navigo from 'navigo';
+import { reaction } from 'mobx';
 
-import stateStore from 'src/stores/stateStore';
+import stateStore from './stores/stateStore';
 import { destringifyQuery, stringifyQuery } from 'src/utils/stringifyQuery';
 
 
@@ -35,5 +36,19 @@ export function updateUrlOnStateChange() {
     router.navigate( url );
     router.resume();
 }
+
+const _urlStateChange = reaction(
+    () => {
+        return {
+            viewName: stateStore.viewName,
+            clientId: stateStore.clientId,
+            imageId: stateStore.imageId,
+        }
+    },
+    updateUrlOnStateChange,
+    {
+        name: 'urlStateChangeReaction',
+    }
+)
 
 export default router;
