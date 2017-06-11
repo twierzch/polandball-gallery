@@ -7,6 +7,10 @@ export class TransportLayer {
         this.clientId = clientId;
     }
 
+    setClientId( clientId ) {
+        this.clientId = clientId;
+    }
+
     fetch( url, config = {} ) {
         const { allowFail, ...conf } = config;
 

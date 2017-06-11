@@ -1,10 +1,9 @@
 import { action, observable } from 'mobx';
 
+import { destringifyQuery } from 'src/utils/stringifyQuery';
 
-import { destringifyQuery, stringifyQuery } from 'src/utils/stringifyQuery';
 
-
-class StateStore {
+export class StateStore {
     @observable viewName;
     @observable clientId;
     @observable imageId;

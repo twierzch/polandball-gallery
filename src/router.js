@@ -1,10 +1,11 @@
 import Navigo from 'navigo';
 import { reaction } from 'mobx';
 
-import stateStore from './stores/stateStore';
+import stateStore from 'src/stores/stateStore';
+import galleryStore from 'src/stores/galleryStore';
 import { destringifyQuery, stringifyQuery } from 'src/utils/stringifyQuery';
 
-
+console.log(galleryStore);
 const router = new Navigo();
 
 router.on({
