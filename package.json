@@ -48,6 +48,7 @@
     "navigo": "^5.1.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-share": "^1.14.1",
     "react-tap-event-plugin": "^2.0.1",
     "whatwg-fetch": "^2.0.3"
   }

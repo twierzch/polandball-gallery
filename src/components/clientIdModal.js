@@ -29,9 +29,9 @@ export class ClientIdModal extends Component {
         const actions = [
             <RaisedButton
                 label="Save"
-                primary={true}
-                disabled={!this.state.clientIdInput}
-                onTouchTap={this.onSaveBtnClick}
+                primary={ true }
+                disabled={ !this.state.clientIdInput }
+                onTouchTap={ this.onSaveBtnClick }
             />
         ]
 

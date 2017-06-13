@@ -34,7 +34,7 @@ export class StateStore {
         this.clientId = clientId;
     }
 
-    @action
+    @action.bound
     setImageId( imageId ) {
         this.imageId = imageId;
     }

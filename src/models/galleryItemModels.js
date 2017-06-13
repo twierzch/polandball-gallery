@@ -1,7 +1,5 @@
 import { action, observable } from 'mobx';
 
-import { CommentModel } from 'src/models/commentModel';
-
 
 export class GalleryItemFactory {
     static create( store, item ) {
@@ -24,6 +22,7 @@ export class GaleryItemModel {
     @observable points = 0;
     @observable comment_count = 0;
     @observable comments = [];
+    @observable imgs = [];
     link = null;
 
     constructor( store, data ) {
@@ -43,20 +42,26 @@ export class GaleryItemModel {
     }
 
     @action
-    fetchComments() {
-        if( !this.comment_count ) return Promise.resolve();
+    setImgLinks( imgLinks ) {
+        this.imgs = imgLinks;
+    }
 
-        const commentsUrl = `https://api.imgur.com/3/gallery/${this.id}/images`
-
-        return this.store.trasnportLayer.get( commentsUrl ).then( resp => {
-            this.comments = resp.data.map( c => new CommentModel( this, c ));
-        });
+    getCommentsUrl() {
+        return `https://api.imgur.com/3/gallery/${this.id}/images`;
     }
 }
 
 export class ImageModel extends GaleryItemModel {
+    isAlbum = false;
+
+    constructor( store, data ) {
+        super( store, data );
+
+        this.setImgLinks([ this.link ])
+    }
+
     getImagesUrls() {
-        return Promise.resolve([ this.link ])
+        return Promise.resolve([ this.imgs ])
     }
 
     getCoverImgUrl() {
@@ -65,16 +70,19 @@ export class ImageModel extends GaleryItemModel {
 }
 
 export class AlbumModel extends GaleryItemModel {
+    isAlbum = true;
+
     getImagesUrls() {
         const imgUrl = `https://api.imgur.com/3/album/${this.id}/images`;
 
-        return this.store.transportLayer.get( imgUrl ).then( resp => {
-            return resp.data.map( img => img.link );
+        return this.store.trasnportLayer.get( imgUrl ).then( resp => {
+            this.setImgLinks( resp.data.map( img => img.link ));
+            return this.imgs;
         })
     }
 
     getCoverImgUrl() {
-        return this.link;
+        return `http://i.imgur.com/${this.cover}.png`;
     }
 }
 
@@ -89,5 +97,6 @@ const _galleryItemProps = [
     'downs',
     'points',
     'comment_count',
-    'link'
+    'link',
+    'cover'
 ];
